@@ -2,84 +2,44 @@
 
 ## Core Patterns
 
-### 1. Service Independence
+### 1. Database per Service
+Each microservice has its own private database, ensuring loose coupling and enabling independent evolution.
 
-Each microservice should be:
-- Independently deployable
-- Independently scalable
-- Owned by a single team
-- Built around business capabilities
+### 2. Event-Driven Architecture
+Services communicate through events, enabling loose coupling and better scalability.
 
-### 2. Data Management
+### 3. API Gateway
+Provides a single entry point for clients, handling cross-cutting concerns like authentication and routing.
 
-- Each service owns its data
-- Database per service pattern
-- Event-driven data updates
-- Eventual consistency between services
+### 4. Circuit Breaker
+Prevents cascading failures by failing fast when a service is unavailable.
 
-### 3. Communication Patterns
+### 5. Service Registry
+Enables service discovery in a dynamic environment.
 
-- Synchronous (REST, gRPC)
-- Asynchronous (Message Queues)
-- Event-Driven Architecture
-- API Gateway pattern
+## Implementation Patterns
 
-### 4. Deployment Patterns
+### 1. Strangler Fig Pattern
+Gradually migrate from a monolith to microservices by incrementally replacing functionality.
 
-- Container-based deployment
-- Service discovery
-- Circuit breakers
-- Load balancing
+### 2. Sidecar Pattern
+Deploy components of an application as separate containers/processes that run alongside the primary service.
 
-## Implementation Considerations
+### 3. Bulkhead Pattern
+Isolate elements of an application into pools so that if one fails, the others will continue to function.
 
-### Frontend Integration
+## Testing Patterns
 
-Micro frontends approach:
-- Decompose frontend like backend
-- Independent deployment
-- Team autonomy
-- Technology flexibility
+### 1. Consumer-Driven Contract Testing
+Ensure services meet their consumers' expectations without requiring end-to-end testing.
 
-### Testing Strategies
+### 2. Service Virtualization
+Simulate the behavior of components to enable testing in isolation.
 
-1. Unit Testing
-   - Service-level testing
-   - Fast feedback
+## Deployment Patterns
 
-2. Integration Testing
-   - Service interaction
-   - Contracts
+### 1. Blue-Green Deployment
+Reduce downtime and risk by running two identical production environments.
 
-3. End-to-End Testing
-   - Critical paths
-   - User journeys
-
-### Monitoring and Observability
-
-1. Centralized Logging
-2. Distributed Tracing
-3. Health Checks
-4. Performance Metrics
-
-## Migration Strategies
-
-### From Monolith to Microservices
-
-1. Strangler Fig Pattern
-   - Gradually replace functionality
-   - Keep monolith running
-   - Incremental approach
-
-2. Branch by Abstraction
-   - Abstract interfaces
-   - Gradual implementation
-   - Safe refactoring
-
-### Common Pitfalls
-
-1. Premature Decomposition
-2. Inappropriate Service Boundaries
-3. Distributed Monolith
-4. Inadequate Monitoring
-5. Ignoring Data Consistency
+### 2. Canary Releases
+Test changes on a small subset of users before full deployment.
